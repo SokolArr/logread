@@ -1,2 +1,2 @@
-# logread
-logread
+venv 
+pip install pyqt5
