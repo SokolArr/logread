@@ -1,9 +1,10 @@
 # Log reader (logread)
 ## About
-- [x] 📝 convenient reading of logs
-- [x] 🌎 opensource
-- [x] 🐧 works on UNIX
-- [ ] 🟰 regexp pattern *(beta)* to read log marks *(date, tag)*
+- [x] 📝 `convenient` reading of logs
+- [x] 🌎 `opensource`
+- [x] 🐧 works on `UNIX`
+- [x] 🔗 `download` log file using `ssh` by `scp` 
+- [ ] 🟰 `regexp pattern` *(beta)* to read log marks *(date, tag)*
 
 ## Quick start
 1. make venv environment
