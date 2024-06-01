@@ -1,8 +1,9 @@
 # Log reader (logread)
 ## About
-- works on UNIX
-- opensource
-- regexp pattern *(in dev)* to read log marks *(date, tag)*
+- [x] 📝 convenient reading of logs
+- [x] 🌎 opensource
+- [x] 🐧 works on UNIX
+- [ ] 🟰 regexp pattern *(beta)* to read log marks *(date, tag)*
 
 ## Quick start
 1. make venv environment
