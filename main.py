@@ -1,6 +1,5 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLabel, QTextEdit, QFileDialog, QLineEdit
-from PyQt5.QtCore import Qt
 import os
 import re
 
@@ -11,7 +10,9 @@ class TextFileReader(QWidget):
         self.date_pattern = '\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2},\d{3}'
         self.tag_pattern = ': \w{4,5}: '
         self.row_pattern = f'({self.date_pattern})({self.tag_pattern})'
-        self.scp_path = 'scp XXXX'
+        self.ssh_path = ''
+        self.path_to_log_file = ''
+        self.scp_down_command = f'{self.ssh_path}:{self.path_to_log_file}'
         self.toggle_buttons()
 
     def initUI(self):
@@ -21,9 +22,10 @@ class TextFileReader(QWidget):
         self.text_edit = QTextEdit()
         self.text_tag = QLabel()
         self.text_date = QLabel()
-        self.button_down = QPushButton('Download (ssh) file', self)
+        self.button_down = QPushButton('Download(ssh) file to "Documents/ssh_downloads"', self)
         self.down_lable = QLabel('Scp command: ', self)
-        self.down_line_edit = QLineEdit('scp XXXX', self)
+        self.ssh_conn_line_edit = QLineEdit('SSH CONN', self)
+        self.path_to_log_file_line_edit = QLineEdit('PATH TO LOG FILE', self)
         self.button_open = QPushButton('Open File', self)
         self.button_start = QPushButton('Go to begins of file', self)
         self.button_next = QPushButton('Next message', self)
@@ -38,7 +40,8 @@ class TextFileReader(QWidget):
         
         layout = QVBoxLayout()
         layout.addWidget(self.down_lable)
-        layout.addWidget(self.down_line_edit)
+        layout.addWidget(self.ssh_conn_line_edit)
+        layout.addWidget(self.path_to_log_file_line_edit)
         layout.addWidget(self.button_down)
         layout.addWidget(self.button_open)
         layout.addWidget(self.date_pattern_lable)
@@ -66,7 +69,9 @@ class TextFileReader(QWidget):
         self.button_end.clicked.connect(self.endPar)
         self.button_exit.clicked.connect(self.close)
         
-        self.down_line_edit.textChanged.connect(self.save_date_pattern)
+        self.ssh_conn_line_edit.textChanged.connect(self.save_ssh_conn)
+        self.path_to_log_file_line_edit.textChanged.connect(self.save_path_to_log_file)
+        
         self.date_pattern_line_edit.textChanged.connect(self.save_date_pattern)
         self.tag_pattern_line_edit.textChanged.connect(self.save_tag_pattern)
         
@@ -81,9 +86,15 @@ class TextFileReader(QWidget):
         self.date_pattern_line_edit.setEnabled(self.buttons_enable)
         self.tag_pattern_line_edit.setEnabled(self.buttons_enable)
     
-    def save_scp_path(self, text):
-        self.scp_path = text
-        print(self.row_pattern)    
+    def save_ssh_conn(self, text):
+        self.ssh_path = text
+        self.scp_down_command = f'{self.ssh_path}:{self.path_to_log_file}'
+        print(self.scp_down_command)
+        
+    def save_path_to_log_file(self, text):
+        self.path_to_log_file = text
+        self.scp_down_command = f'{self.ssh_path}:{self.path_to_log_file}'
+        print(self.scp_down_command) 
     
     def save_date_pattern(self, text):
         self.date_pattern = text
@@ -96,9 +107,10 @@ class TextFileReader(QWidget):
         print(self.row_pattern)
     
     def downloadFile(self):
-        os.system('rm -rf ~/Documents/download_ssh')
-        os.system('mkdir ~/Documents/download_ssh')
-        os.system(f'{self.scp_path} ~/Documents/download_ssh ')
+        os.system('rm -rf ~/Documents/ssh_downloads')
+        os.system('mkdir ~/Documents/ssh_downloads')
+        os.system(f'scp {self.scp_down_command} ~/Documents/ssh_downloads')
+        print(self.scp_down_command)
     
     def openFile(self):
         try:
