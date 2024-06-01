@@ -42,7 +42,6 @@ class TextFileReader(QWidget):
         layout.addWidget(self.button_down)
         layout.addWidget(self.button_open)
         layout.addWidget(self.date_pattern_lable)
-        layout.addWidget(self.date_pattern_lable)
         layout.addWidget(self.date_pattern_line_edit)
         layout.addWidget(self.tag_pattern_lable)
         layout.addWidget(self.tag_pattern_line_edit)
