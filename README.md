@@ -23,4 +23,4 @@ Read log format:
 ![xxx](pics/image-1.png)
 
 Program:
-![xxx](image.png)
+![xxx](pics/image.png)
