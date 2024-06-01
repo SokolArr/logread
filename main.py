@@ -16,16 +16,17 @@ class TextFileReader(QWidget):
         self.toggle_buttons()
 
     def initUI(self):
-        self.setWindowTitle('Log File Reader')
+        self.setWindowTitle('logread')
         self.setGeometry(200, 200, 600, 600)
 
         self.text_edit = QTextEdit()
         self.text_tag = QLabel()
         self.text_date = QLabel()
-        self.button_down = QPushButton('Download(ssh) file to "Documents/ssh_downloads"', self)
-        self.down_lable = QLabel('Scp command: ', self)
-        self.ssh_conn_line_edit = QLineEdit('SSH CONN', self)
-        self.path_to_log_file_line_edit = QLineEdit('PATH TO LOG FILE', self)
+        self.button_down = QPushButton('Download(scp-ssh) file to "Documents/ssh_downloads"', self)
+        self.ssh_login_lable = QLabel('shh login: ', self)
+        self.ssh_conn_line_edit = QLineEdit('user@180.167.1.1', self)
+        self.path_to_log_file_lable = QLabel('Path to log file: ', self)
+        self.path_to_log_file_line_edit = QLineEdit('~/Documents/logs/main.log', self)
         self.button_open = QPushButton('Open File', self)
         self.button_start = QPushButton('Go to begins of file', self)
         self.button_next = QPushButton('Next message', self)
@@ -39,8 +40,9 @@ class TextFileReader(QWidget):
         self.text_info = QLabel()
         
         layout = QVBoxLayout()
-        layout.addWidget(self.down_lable)
+        layout.addWidget(self.ssh_login_lable)
         layout.addWidget(self.ssh_conn_line_edit)
+        layout.addWidget(self.path_to_log_file_lable)
         layout.addWidget(self.path_to_log_file_line_edit)
         layout.addWidget(self.button_down)
         layout.addWidget(self.button_open)
