@@ -13,4 +13,8 @@
 - pyqt5
   
 ## pics
-![xxx](image.png)
+Program:
+![xxx](pics/image.png)
+
+Read log format:
+![xxx](pics/image-1.png)
